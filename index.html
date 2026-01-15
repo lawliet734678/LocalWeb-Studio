@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalWeb Studio — Premium Demo Experience</title>
+<style>
+/* =========================
+  GLOBAL RESET & VARIABLES
+========================= */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#05060a;
+  --text:#e8e9ec;
+  --muted:#9da0aa;
+  --accent:#7df9ff;
+  --glow:rgba(125,249,255,0.25);
+  --glass:rgba(255,255,255,0.08);
+  --stroke:rgba(255,255,255,0.12);
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+  background: radial-gradient(circle at top,#0b0e17,#05060a 70%);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* =========================
+  BACKGROUND AURA
+========================= */
+.bg-motion{
+  position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(125,249,255,0.06),transparent 40%),
+    radial-gradient(circle at 80% 60%,rgba(180,100,255,0.06),transparent 45%);
+  animation:drift 25s linear infinite alternate;
+}
+@keyframes drift{0%{transform:translateY(0px);}100%{transform:translateY(-120px);}}
+
+/* =========================
+  HERO
+========================= */
+section{padding:100px 8vw;position:relative;}
+.hero{min-height:100vh;display:flex;align-items:center;}
+.hero-inner{max-width:900px;}
+.hero h1{font-size:clamp(3rem,6vw,5.5rem);line-height:1.05;}
+.hero p{margin-top:25px;font-size:1.15rem;color:var(--muted);max-width:520px;}
+.cta{
+  margin-top:50px;display:inline-block;padding:16px 40px;border-radius:50px;
+  background:linear-gradient(135deg,var(--accent),#b388ff);
+  color:#05060a;font-weight:600;text-decoration:none;position:relative;overflow:hidden;
+  box-shadow:0 0 40px var(--glow);transition:transform .3s ease,box-shadow .3s ease;
+}
+.cta:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 0 70px var(--glow);}
+
+/* =========================
+  GLASS PANEL
+========================= */
+.glass{background:var(--glass);border:1px solid var(--stroke);backdrop-filter:blur(14px);
+border-radius:22px;padding:40px;transition:transform .4s ease,box-shadow .4s ease;}
+.glass:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(0,0,0,.6);}
+
+/* =========================
+  ABOUT
+========================= */
+.about p{font-size:1.05rem;color:var(--muted);line-height:1.7;}
+
+/* =========================
+  SERVICES
+========================= */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;}
+.service-card h3{margin-bottom:15px;}
+.service-card ul{list-style:none;color:var(--muted);line-height:1.7;}
+
+/* =========================
+  DEMO GRID
+========================= */
+.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;}
+.demo-card{padding:20px;cursor:pointer;}
+.demo-label{margin-top:15px;color:var(--muted);font-size:.9rem;}
+
+/* =========================
+  MODAL DEMO
+========================= */
+.demo-modal{position:fixed;inset:0;background:rgba(5,6,10,0.98);z-index:999;display:none;flex-direction:column;}
+.demo-header{height:50px;background:rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;padding:0 20px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.demo-header button{background:none;border:none;color:white;font-size:20px;cursor:pointer;}
+.demo-modal iframe{flex:1;width:100%;border:none;border-radius:0 0 0 0;}
+
+/* =========================
+  LIVE DEMOS ANIMATION
+========================= */
+.demo-card .mock-site,.demo-card .mock-poster{
+  border-radius:18px;height:200px;background:linear-gradient(135deg,#141726,#0b0e17);
+  position:relative;overflow:hidden;animation:glowShift 5s ease-in-out infinite alternate;
+}
+@keyframes glowShift{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(60deg);}}
+
+.demo-card:hover .mock-site,.demo-card:hover .mock-poster{
+  transform:scale(1.04);box-shadow:0 20px 80px var(--glow);transition:all .5s ease;
+}
+
+/* =========================
+  STATS
+========================= */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;text-align:center;}
+.stat h2{font-size:2.8rem;color:var(--accent);}
+.stat p{color:var(--muted);}
+
+/* =========================
+  CONTACT
+========================= */
+form{max-width:600px;}
+input,textarea{width:100%;padding:14px;margin-bottom:18px;background:rgba(255,255,255,0.05);border:1px solid var(--stroke);border-radius:12px;color:var(--text);}
+textarea{resize:none;height:120px;}
+button.submit-demo{padding:16px 40px;background:linear-gradient(135deg,var(--accent),#b388ff);border:none;color:#05060a;font-weight:600;border-radius:50px;cursor:pointer;box-shadow:0 0 40px var(--glow);transition:.3s;}
+button.submit-demo:hover{transform:scale(1.03);box-shadow:0 0 70px var(--glow);}
+
+/* =========================
+  RESPONSIVE
+========================= */
+@media(max-width:600px){section{padding:80px 6vw;} .hero h1{font-size:3rem;}}
+</style>
+</head>
+<body>
+
+<div class="bg-motion"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>LocalWeb Studio</h1>
+    <p>We design websites that feel alive — cinematic, futuristic, and premium.</p>
+    <a class="cta" href="#services">Explore Services</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="glass about">
+    <h2>About the Studio</h2>
+    <p>We are a small creative team building ultra-modern websites and visual assets with smooth animations, futuristic visuals, and high-end design.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2 style="margin-bottom:40px;">Services</h2>
+  <div class="services">
+    <div class="glass service-card">
+      <h3>🌐 Website Design & Development</h3>
+      <ul>
+        <li>Modern layouts</li>
+        <li>Responsive systems</li>
+        <li>Smooth animations</li>
+        <li>Clean, fast code</li>
+      </ul>
+    </div>
+    <div class="glass service-card">
+      <h3>🎨 Canva Poster & Banner Design</h3>
+      <ul>
+        <li>Posters</li>
+        <li>Social media banners</li>
+        <li>Thumbnails</li>
+        <li>Visual branding</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMOS -->
+<section id="demo">
+  <h2 style="margin-bottom:40px;">Live Demo Websites</h2>
+  <div class="demo-grid">
+
+    <div class="glass demo-card" onclick="openDemo(1)">
+      <div class="mock-site"></div>
+      <p class="demo-label">Business Landing Page</p>
+    </div>
+
+    <div class="glass demo-card" onclick="openDemo(2)">
+      <div class="mock-site"></div>
+      <p class="demo-label">Portfolio Showcase</p>
+    </div>
+
+    <div class="glass demo-card" onclick="openDemo(3)">
+      <div class="mock-poster"></div>
+      <p class="demo-label">Canva Poster Demo</p>
+    </div>
+
+    <div class="glass demo-card" onclick="openDemo(4)">
+      <div class="mock-poster"></div>
+      <p class="demo-label">Social Banner Demo</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY -->
+<section>
+  <h2 style="margin-bottom:40px;">Why LocalWeb Studio</h2>
+  <div class="stats">
+    <div class="glass stat"><h2 data-count="120">0</h2><p>Design Concepts</p></div>
+    <div class="glass stat"><h2 data-count="100">0</h2><p>Custom Builds</p></div>
+    <div class="glass stat"><h2 data-count="24">0</h2><p>Hour Turnaround</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <h2 style="margin-bottom:30px;">Request a Demo Website</h2>
+  <form class="glass">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Message"></textarea>
+    <button type="submit" class="submit-demo">Request a Demo Website</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 LocalWeb Studio — Premium Web Experiences
+</footer>
+
+<!-- DEMO MODAL -->
+<div id="demoModal" class="demo-modal">
+  <div class="demo-header">
+    <span>Demo Website</span>
+    <button onclick="closeDemo()">✕</button>
+  </div>
+  <iframe id="demoFrame"></iframe>
+</div>
+
+<script>
+/* =========================
+   COUNTERS
+========================= */
+document.querySelectorAll('[data-count]').forEach(counter=>{
+  let update=()=>{const target=+counter.dataset.count;const current=+counter.innerText;const inc=Math.ceil(target/80);if(current<target){counter.innerText=current+inc;setTimeout(update,30);}else{counter.innerText=target;}};update();
+});
+
+/* =========================
+   DEMO MODAL LOGIC
+========================= */
+function openDemo(num){
+  const frame=document.getElementById("demoFrame");
+  let html='';
+  if(num===1){ /* Business Landing */ html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Business Landing</title><style>body{margin:0;font-family:Arial,sans-serif;background:#0b0e17;color:white;}section{padding:80px 10vw;} h1{font-size:3rem;} .card{background:rgba(255,255,255,0.08);padding:30px;border-radius:20px;margin-top:40px;}</style></head><body><section><h1>Business Landing Page</h1><p>Welcome to our demo site.</p></section><section><div class="card">Feature One</div><div class="card">Feature Two</div></section></body></html>`;}
+  if(num===2){ /* Portfolio */ html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Portfolio</title><style>body{margin:0;font-family:Arial,sans-serif;background:#0b0e17;color:white;}section{padding:80px 10vw;} h1{font-size:3rem;} .card{background:rgba(255,255,255,0.08);padding:30px;border-radius:20px;margin-top:40px;}</style></head><body><section><h1>Portfolio Showcase</h1><p>Check out projects here.</p></section><section><div class="card">Project One</div><div class="card">Project Two</div></section></body></html>`;}
+  if(num===3){ /* Poster */ html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Poster Demo</title><style>body{margin:0;font-family:Arial,sans-serif;background:#0b0e17;color:white;} .poster{height:90vh;background:linear-gradient(135deg,#7df9ff,#b388ff,#ff7ad9);display:flex;align-items:center;justify-content:center;font-size:3rem;text-align:center;}</style></head><body><div class="poster">Canva Poster Demo</div></body></html>`;}
+  if(num===4){ /* Banner */ html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Social Banner Demo</title><style>body{margin:0;font-family:Arial,sans-serif;background:#0b0e17;color:white;} .banner{height:80vh;background:linear-gradient(135deg,#ff7ad9,#7df9ff);display:flex;align-items:center;justify-content:center;font-size:2.5rem;text-align:center;}</style></head><body><div class="banner">Social Banner Demo</div></body></html>`;}
+  frame.srcdoc=html;
+  document.getElementById("demoModal").style.display="flex";
+}
+function closeDemo(){document.getElementById("demoModal").style.display="none";document.getElementById("demoFrame").srcdoc='';}
+</script>
+
+</body>
+</html>
